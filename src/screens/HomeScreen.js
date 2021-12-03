@@ -38,8 +38,8 @@ const HomeScreen = ({ navigation }) => {
   const renderLineUp = ({ item, index }) => {
     return (
       <TouchableOpacity key={item.artist_id} onPress={() => {
-        /* 1. Navigate to the singleArtistScreen route with params */
-        navigation.navigate('SingleArtistScreen');
+        /* Navigate to the singleArtistScreen route with params */
+        navigation.navigate('SingleArtistScreen', {item});
       }}>
         <Card containerStyle={{ marginBottom: -10, borderRadius: 5, padding: 0 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -63,7 +63,10 @@ const HomeScreen = ({ navigation }) => {
   // Render artist
   const renderArtistCard = ({ item, index }) => {
     return (
-      <TouchableOpacity key={index} style={{ width: '50%' }} onPress={() => console.log('Voir ' + item.artist_name)}>
+      <TouchableOpacity key={index} style={{ width: '50%' }} onPress={() => {
+        /* Navigate to the singleArtistScreen route with params */
+        navigation.navigate('SingleArtistScreen', {item});
+      }}>
         <Card containerStyle={{ padding: 0, borderRadius: 5, marginHorizontal: 5, marginVertical: 12 }}>
           <Card.Image
             style={{ width: '100%', height: 120, borderTopLeftRadius: 5, borderTopRightRadius: 5 }}

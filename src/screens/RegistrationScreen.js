@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Button, ActivityIndicator, TextInput, Alert } f
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-const ConnectionScreen = ({ navigation }) => {
+const RegistrationScreen = ({ navigation }) => {
     const [isLoading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -22,7 +22,7 @@ const ConnectionScreen = ({ navigation }) => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'applicaiton/json'
+                        'Accept': 'application/json'
                     }, 
                     body: JSON.stringify({
                         user_email: email,
@@ -31,13 +31,12 @@ const ConnectionScreen = ({ navigation }) => {
                 });
 
                 const json = await response.json();
-                console.log(json)
                 const responseStatus = response.status
-
+                
                 // Check status code
                 if(responseStatus === 201) {
                     setUserToken(json.token)
-                    alert('Logged in successfully.\n\nYour token is: \n' + json.token)
+                    alert('Logged in successfully.\n\nYour token is: \n' + userToken)
                 } else if (responseStatus >= 400 && responseStatus < 500){
                     alert('Wrong credentials, please try again')
                 } else if (responseStatus >= 500){
@@ -59,8 +58,8 @@ const ConnectionScreen = ({ navigation }) => {
             {isLoading ? <ActivityIndicator /> : (
 
                 <SafeAreaView style={{ justifyContent: 'center', alignItems: 'center', width: 200,  }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Bonjour !</Text>
-                    <Text style={{ fontSize: 14, textAlign: 'center', marginBottom: 10 }}>Veuillez vous connecter pour accéder aux fonctionnalités administrateur.</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Bienvenue !</Text>
+                    <Text style={{ fontSize: 14, textAlign: 'center', marginBottom: 10 }}>Vous souhaitez créer un compte administrateur ?</Text>
                     <TextInput
                         style={styles.input}
                         onChangeText={setEmail}
@@ -108,4 +107,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ConnectionScreen
+export default RegistrationScreen
