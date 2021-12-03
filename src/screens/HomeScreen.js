@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Button, SafeAreaView, FlatList, ActivityIndicator, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
 import { Card, ButtonGroup, Chip } from 'react-native-elements'
 import { artistImages } from '../components/ArtistImages'
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import SingleArtistScreen from '../screens/SingleArtistScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SingleArtistScreen from '../screens/SingleArtistScreen';
 
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 
 const HomeScreen = ({ navigation }) => {
@@ -37,7 +37,10 @@ const HomeScreen = ({ navigation }) => {
   // Render lineup
   const renderLineUp = ({ item, index }) => {
     return (
-      <TouchableOpacity key={item.artist_id}>
+      <TouchableOpacity key={item.artist_id} onPress={() => {
+        /* 1. Navigate to the singleArtistScreen route with params */
+        navigation.navigate('SingleArtistScreen');
+      }}>
         <Card containerStyle={{ marginBottom: -10, borderRadius: 5, padding: 0 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image
@@ -152,10 +155,6 @@ const HomeScreen = ({ navigation }) => {
 
       )}
 
-      {/* <Stack.Navigator initialRouteName="HomeScreen">
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="SingleArtistScreen" component={SingleArtistScreen} />
-      </Stack.Navigator> */}
     </View> // Main View container
   )
 }

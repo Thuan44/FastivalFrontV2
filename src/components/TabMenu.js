@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreenStack from '../components/HomeScreenStack';
 import MapScreen from '../screens/MapScreen';
 import ConnectionScreen from '../screens/ConnectionScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -41,7 +41,7 @@ const TabMenu = () => {
         >
             <Tab.Screen
                 name="Home"
-                component={HomeScreen}
+                component={HomeScreenStack}
                 options={{ title: 'Accueil', headerShown: false }}
             />
             <Tab.Screen
