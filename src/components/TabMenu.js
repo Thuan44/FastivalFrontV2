@@ -5,6 +5,7 @@ import MapScreen from '../screens/MapScreen';
 import ConnectionScreen from '../screens/ConnectionScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AuthScreenStack from './AuthScreenStack';
 
 const TabMenu = () => {
     const Tab = createBottomTabNavigator();
@@ -51,8 +52,8 @@ const TabMenu = () => {
             />
             <Tab.Screen
                 name="Connection"
-                component={ConnectionScreen}
-                options={{ title: 'Connection Screen', headerShown: false }}
+                component={AuthScreenStack}
+                options={{ title: 'Authentication Screen', headerShown: false }}
             />
         </Tab.Navigator>
     )

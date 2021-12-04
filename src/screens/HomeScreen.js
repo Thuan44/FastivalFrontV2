@@ -65,7 +65,7 @@ const HomeScreen = ({ navigation }) => {
     return (
       <TouchableOpacity key={index} style={{ width: '50%' }} onPress={() => {
         /* Navigate to the singleArtistScreen route with params */
-        navigation.navigate('SingleArtistScreen', {item});
+        navigation.navigate('SingleArtistScreen', {item})
       }}>
         <Card containerStyle={{ padding: 0, borderRadius: 5, marginHorizontal: 5, marginVertical: 12 }}>
           <Card.Image

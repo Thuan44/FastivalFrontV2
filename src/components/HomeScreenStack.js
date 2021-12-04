@@ -10,8 +10,8 @@ const HomeStack = createStackNavigator();
 const HomeScreenStack = () => {
   return (
     <HomeStack.Navigator initialRouteName="HomeScreen">
-      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />             
-      <HomeStack.Screen name="SingleArtistScreen" component={SingleArtistScreen} />
+      <HomeStack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}}/>             
+      <HomeStack.Screen name="SingleArtistScreen" component={SingleArtistScreen} options={{headerShown: false}}/>
     </HomeStack.Navigator>
   )
 };
