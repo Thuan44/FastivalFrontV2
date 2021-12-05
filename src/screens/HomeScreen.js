@@ -4,14 +4,15 @@ import { Card, ButtonGroup, Chip } from 'react-native-elements'
 import { artistImages } from '../components/ArtistImages'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SingleArtistScreen from '../screens/SingleArtistScreen';
+import { Badge, withBadge } from 'react-native-elements'
 
 const Stack = createNativeStackNavigator();
 
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ route, navigation }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-
+  const [userToken, setUserToken] = useState(null);
 
   // Top button group
   const topButtons = ['Programmation', 'Artistes']
@@ -84,6 +85,11 @@ const HomeScreen = ({ navigation }) => {
   return (
 
     <View style={styles.container}>
+      {/* {token ? <View style={{ flexDirection: 'rows' }}>
+        <Badge status="warning" /><Text style={styles.adminTitle}>Administrateur</Text>
+              </View> 
+        : null
+      } */}
 
       {isLoading ? <ActivityIndicator /> : (
         <View>
@@ -167,6 +173,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     paddingBottom: 180,
+  },
+  adminTitle: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginBottom: 10
   },
   image: {
     width: 140,

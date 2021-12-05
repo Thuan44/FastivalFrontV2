@@ -38,10 +38,9 @@ const ConnectionScreen = ({ navigation }) => {
                 // Check status code
                 if (responseStatus === 201) {
                     alert('Logged in successfully.\n\nYour token is: \n' + json.token)
-                    setUserToken(json.token)
-                    setConnected(true)
-                    // navigation.navigate('SingleArtistScreen', {item}
-
+                    setUserToken(json.token) // ---> Need to be passed in store
+                    setConnected(true) // ---> Need to be passed in store
+                    navigation.navigate('HomeScreen', {token: json.token})
                 } else if (responseStatus >= 400 && responseStatus < 500) {
                     alert('Wrong credentials, please try again')
                 } else if (responseStatus >= 500) {
