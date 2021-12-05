@@ -69,7 +69,7 @@ const AddArtistScreen = ({route, navigation}) => {
         const responseStatus = response.status;
 
         // Check status code
-        if (responseStatus === 200) {
+        if (responseStatus === 200 || responseStatus === 201) {
           alert('Artist added successfully');
         } else if (responseStatus >= 400 && responseStatus < 500) {
           alert('Page not found');
