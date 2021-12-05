@@ -5,6 +5,7 @@ import { artistImages } from '../components/ArtistImages'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SingleArtistScreen from '../screens/SingleArtistScreen';
 import { Badge, withBadge } from 'react-native-elements'
+import {useSelector, useDispatch} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,7 +13,10 @@ const Stack = createNativeStackNavigator();
 const HomeScreen = ({ route, navigation }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [userToken, setUserToken] = useState(null);
+
+  // Redux State Management
+  const {tokenValue} = useSelector(state => state.token);
+  const dispatch = useDispatch();
 
   // Top button group
   const topButtons = ['Programmation', 'Artistes']
@@ -34,6 +38,7 @@ const HomeScreen = ({ route, navigation }) => {
   useEffect(() => {
     getArtists();
   }, []);
+
 
   // Render lineup
   const renderLineUp = ({ item, index }) => {
@@ -85,11 +90,12 @@ const HomeScreen = ({ route, navigation }) => {
   return (
 
     <View style={styles.container}>
-      {/* {token ? <View style={{ flexDirection: 'rows' }}>
-        <Badge status="warning" /><Text style={styles.adminTitle}>Administrateur</Text>
-              </View> 
-        : null
-      } */}
+      {tokenValue !== null ? 
+        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>
+          <Badge status="warning" /><Text>Administrateur</Text>
+        </View>
+      : null
+      }
 
       {isLoading ? <ActivityIndicator /> : (
         <View>
