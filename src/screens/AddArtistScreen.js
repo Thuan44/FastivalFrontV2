@@ -31,7 +31,6 @@ const AddArtistScreen = ({route}) => {
 
   const apiUrl = 'http://10.0.2.2:8000/api/artists';
 
-  // Fetch data method
   const addArtist = (
     artistName,
     artistDescription,
@@ -41,7 +40,6 @@ const AddArtistScreen = ({route}) => {
     stageId,
     token,
   ) => {
-    // Fetch user data
     const addAttempt = async () => {
       try {
         const response = await fetch(apiUrl, {
@@ -65,7 +63,7 @@ const AddArtistScreen = ({route}) => {
         const responseStatus = response.status;
 
         // Check status code
-        if (responseStatus === 201) {
+        if (responseStatus === 200) {
           alert('Artist added successfully');
         } else if (responseStatus >= 400 && responseStatus < 500) {
           alert('Page not found');

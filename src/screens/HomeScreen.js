@@ -24,14 +24,12 @@ const HomeScreen = ({route, navigation}) => {
   //================ VARIABLE DECLARATION ================//
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const topButtons = ['Programmation', 'Artistes'];
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   // Redux State Management
   const {tokenValue} = useSelector(state => state.token);
   const dispatch = useDispatch();
-
-  // Top button group
-  const topButtons = ['Programmation', 'Artistes'];
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   // Fetch data method
   const getArtists = async () => {
@@ -133,6 +131,7 @@ const HomeScreen = ({route, navigation}) => {
               <Text> Administrateur</Text>
             </View>
           ) : null}
+          
           {/* Top Buttons */}
           <ButtonGroup
             onPress={setSelectedIndex}
@@ -252,7 +251,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    paddingBottom: 180,
+    paddingBottom: 200
   },
   adminTitle: {
     textAlign: 'center',

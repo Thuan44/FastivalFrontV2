@@ -51,7 +51,7 @@ const ConnectionScreen = ({navigation}) => {
           dispatch(setToken(json.token));
           alert('Logged in successfully.\n\nYour token is: \n' + json.token);
 
-          navigation.navigate('HomeScreen', {token: json.token});
+          navigation.navigate('HomeScreen');
         } else if (responseStatus >= 400 && responseStatus < 500) {
           alert('Wrong credentials, please try again');
         } else if (responseStatus >= 500) {
