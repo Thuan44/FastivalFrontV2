@@ -12,7 +12,6 @@ const AuthScreenStack = () => {
     <AuthStack.Navigator initialRouteName="ConnectionScreen">
       <AuthStack.Screen name="ConnectionScreen" component={ConnectionScreen} options={{headerShown: false}}/>             
       <AuthStack.Screen name="RegistrationScreen" component={RegistrationScreen} options={{headerShown: false}}/>             
-      <AuthStack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}}/>
     </AuthStack.Navigator>
   )
 };

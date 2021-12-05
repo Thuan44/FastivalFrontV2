@@ -49,10 +49,9 @@ const ConnectionScreen = ({navigation}) => {
         // Check status code
         if (responseStatus === 201) {
           dispatch(setToken(json.token));
-          alert('Logged in successfully.\n\nYour token is: \n' + {tokenValue});
-          setConnected(true);
+          alert('Logged in successfully.\n\nYour token is: \n' + json.token);
 
-          //   navigation.navigate('HomeScreen', {token: json.token});
+          navigation.navigate('HomeScreen', {token: json.token});
         } else if (responseStatus >= 400 && responseStatus < 500) {
           alert('Wrong credentials, please try again');
         } else if (responseStatus >= 500) {
@@ -78,16 +77,15 @@ const ConnectionScreen = ({navigation}) => {
         },
       });
       const json = await response.json();
-      dispatch(setToken(""));
+      dispatch(setToken(''));
       alert(json.message);
-      setConnected(false);
     } catch (error) {
       console.error(error);
     }
   };
 
   // View
-  if (!connected) {
+  if (tokenValue === '') {
     return (
       <View style={styles.container}>
         {isLoading ? (

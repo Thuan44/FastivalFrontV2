@@ -90,9 +90,9 @@ const HomeScreen = ({ route, navigation }) => {
   return (
 
     <View style={styles.container}>
-      {tokenValue !== null ? 
+      {tokenValue !== "" ? 
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 10}}>
-          <Badge status="warning" /><Text>Administrateur</Text>
+          <Badge status="warning" /><Text> Administrateur</Text>
         </View>
       : null
       }
