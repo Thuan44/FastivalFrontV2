@@ -7,7 +7,7 @@ const stringify = data => {
   return JSON.parse(JSON.stringify(data));
 };
 
-const SingleArtistScreen = ({route}) => {
+const SingleArtistScreen = ({route, navigation}) => {
   /* Get the param */
   const {item} = route.params;
 
@@ -90,7 +90,7 @@ const SingleArtistScreen = ({route}) => {
             }}>
             <Button
               title="Modifier"
-              onPress={() => console.log('Modifier')}
+              onPress={() => navigation.navigate('AddArtistScreen', {item})}
               color="lightgreen"
               style={styles.button}
             />

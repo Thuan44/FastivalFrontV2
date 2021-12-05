@@ -17,7 +17,13 @@ const stringify = data => {
   return JSON.parse(JSON.stringify(data));
 };
 
-const AddArtistScreen = ({route}) => {
+const AddArtistScreen = ({route, navigation}) => {
+  /* Get the param if update artist*/
+  let item;
+  if (route.params !== undefined) {
+    item = route.params.item;
+  }
+
   const [artistName, setartistName] = useState('');
   const [artistDescription, setartistDescription] = useState('');
   const [artistImage, setartistImage] = useState('');
@@ -29,7 +35,7 @@ const AddArtistScreen = ({route}) => {
   const {tokenValue} = useSelector(state => state.token);
   const dispatch = useDispatch();
 
-  const apiUrl = 'http://10.0.2.2:8000/api/artists';
+  const apiUrl = 'http://10.0.2.2:8000/api/artists/';
 
   const addArtist = (
     artistName,
@@ -77,6 +83,53 @@ const AddArtistScreen = ({route}) => {
     addAttempt();
   };
 
+
+  const updateArtist = (
+    artistName,
+    artistDescription,
+    artistImage,
+    concertDate,
+    concertTime,
+    stageId,
+    token,
+  ) => {
+    const updateAttempt = async () => {
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + token,
+          },
+          body: JSON.stringify({
+            artist_name: artistName,
+            artist_description: artistDescription,
+            artist_img: artistImage,
+            artist_concert_date: concertDate,
+            artist_concert_time: concertTime,
+            stage_id: stageId,
+          }),
+        });
+
+        const json = await response.json();
+        const responseStatus = response.status;
+
+        // Check status code
+        if (responseStatus === 200 || responseStatus === 201) {
+          alert('Artist updated successfully');
+        } else if (responseStatus >= 400 && responseStatus < 500) {
+          alert('Page not found');
+        } else if (responseStatus >= 500) {
+          alert('Server Error');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    updateAttempt();
+  };
+
   return (
     <View style={styles.container}>
       <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>
@@ -91,35 +144,35 @@ const AddArtistScreen = ({route}) => {
         <TextInput
           style={styles.input}
           onChangeText={setartistName}
-          value={artistName}
+          value={item ? item.artist_name : artistName}
           placeholder="Nom de l'artiste"
         />
         <TextInput
           style={styles.input}
           onChangeText={setartistDescription}
-          value={artistDescription}
+          value={item ? item.artist_description : artistDescription}
           placeholder="Description de l'artiste"
         />
         <TextInput
           style={styles.input}
           onChangeText={setartistImage}
-          value={artistImage}
+          value={item ? item.artist_img : artistImage}
           placeholder="Nom de l'image"
         />
         <TextInput
           style={styles.input}
           onChangeText={setConcertDate}
-          value={concertDate}
+          value={item ? item.artist_concert_date : concertDate}
           placeholder="Date (YYYY-MM-DD)"
         />
         <TextInput
           style={styles.input}
           onChangeText={setConcertTime}
-          value={concertTime}
+          value={item ? item.artist_concert_time : concertTime}
           placeholder="Heure (HH:MM:SS)"
         />
         <Picker
-          selectedValue={stageId}
+          selectedValue={item ? item.stage_id : stageId}
           style={styles.input}
           onValueChange={(itemValue, itemIndex) => setStageId(itemValue)}>
           <Picker.Item value="0" label="Scène" />
@@ -127,22 +180,42 @@ const AddArtistScreen = ({route}) => {
           <Picker.Item label="Scène 2" value="2" />
           <Picker.Item label="Scène 5" value="5" />
         </Picker>
-        <Button
-          title="Ajouter"
-          onPress={() =>
-            addArtist(
-              artistName,
-              artistDescription,
-              artistImage,
-              concertDate,
-              concertTime,
-              stageId,
-              tokenValue,
-            )
-          }
-          color="salmon"
-          style={styles.button}
-        /> 
+        {route.params === undefined ? (
+          <Button
+            title="Ajouter"
+            onPress={() =>
+              addArtist(
+                artistName,
+                artistDescription,
+                artistImage,
+                concertDate,
+                concertTime,
+                stageId,
+                tokenValue,
+              )
+            }
+            color="salmon"
+            style={styles.button}
+          />
+        ) : null}
+        {route.params !== undefined ? (
+          <Button
+            title="Modifier"
+            onPress={() =>
+              updateArtist(
+                artistName,
+                artistDescription,
+                artistImage,
+                concertDate,
+                concertTime,
+                stageId,
+                tokenValue,
+              )
+            }
+            color="lightgreen"
+            style={styles.button}
+          />
+        ) : null}
       </SafeAreaView>
     </View>
   );
