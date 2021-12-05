@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    paddingBottom: 250
+    paddingBottom: 200
   },
   adminTitle: {
     textAlign: 'center',
